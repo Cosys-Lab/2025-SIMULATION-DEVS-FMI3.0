@@ -116,7 +116,8 @@ def plot(filename):
     os.makedirs('.\\traces\\plots\\', exist_ok=True)
     plt.savefig(".\\traces\\plots\\acc_system_pypdevs.pdf", format="pdf", bbox_inches="tight")
     plt.savefig(".\\traces\\plots\\acc_system_pypdevs.png", format="png", bbox_inches="tight")
-    plt.show()
+    plt.show(block=False)
+    plt.pause(0.001)
 
     # Save data to hdf5 file
     os.makedirs('.\\traces\\hdf5\\', exist_ok=True)
