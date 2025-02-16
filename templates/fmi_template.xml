@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+2025-SIMULATION-DEVS-FMI3.0
+Copyright (C) 2025 Cosys-lab, University of Antwerp
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<fmiModelDescription
+    fmiVersion="3.0"
+    modelName="{{ model_name }}"
+    instantiationToken="{{ instantiation_token }}"
+    author="{{ author }}"
+    version="{{ version }}"
+    license="{{ license }}"
+    generationDateAndTime="{{ generation_date_time }}"
+    variableNamingConvention="{{ variable_naming_convention }}"
+    generationTool="{{ generation_tool }}">
+
+  <CoSimulation
+    modelIdentifier="{{ co_simulation.model_identifier }}"
+    needsExecutionTool="{{ co_simulation.needs_execution_tool }}"
+    canBeInstantiatedOnlyOncePerProcess="{{ co_simulation.can_be_instantiated_only_once }}"
+    canGetAndSetFMUState="{{ co_simulation.can_get_and_set_fmu_state }}"
+    canSerializeFMUState="{{ co_simulation.can_serialize_fmu_state }}"
+    canHandleVariableCommunicationStepSize="{{ co_simulation.can_handle_variable_communication_step_size }}"
+    hasEventMode="{{ co_simulation.has_event_mode }}"
+  />
+
+  <LogCategories>
+  {%- for category in log_categories %}
+    <Category name="{{ category.name }}" />
+  {%- endfor %}
+  </LogCategories>
+
+  <ModelVariables>
+  {%- for variable in model_variables %}
+    {%- if not variable.dimensions and not variable.starts %}
+    <{{ variable.type }}
+      name="{{ variable.name }}"
+      valueReference="{{ variable.value_reference }}"
+      causality="{{ variable.causality }}"
+      {% if variable.variability %}variability="{{ variable.variability }}" {% endif %}
+      {% if variable.description %}description="{{ variable.description }}" {% endif %}
+      {% if variable.initial %}initial="{{ variable.initial }}" {% endif %}
+      {% if variable.start %}start="{{ variable.start }}" {% endif %}
+      {% if variable.clocks %}clocks="{{ variable.clocks }}" {% endif %}
+      {% if variable.interval_variability %}intervalVariability="{{ variable.interval_variability }}" {% endif %}/>
+    {%- else %}
+    <{{ variable.type }}
+      name="{{ variable.name }}"
+      valueReference="{{ variable.value_reference }}"
+      causality="{{ variable.causality }}"
+      {% if variable.variability %}
+      variability="{{ variable.variability }}"
+      {% endif %}
+      {% if variable.description %}
+      description="{{ variable.description }}"
+      {% endif %}
+      {% if variable.initial %}
+      initial="{{ variable.initial }}"
+      {% endif %}
+      {% if variable.start %}
+      start="{{ variable.start }}"
+      {% endif %}
+      {% if variable.clocks %}
+      clocks="{{ variable.clocks }}"
+      {% endif %}
+      {% if variable.interval_variability %}
+      intervalVariability="{{ variable.interval_variability }}"
+      {% endif %}>
+      {%- if variable.dimensions %}
+        {%- for dimension in variable.dimensions %}
+        <Dimension
+          {% if dimension.start is not none %}
+          start="{{ dimension.start }}"
+          {% endif %}
+        />
+        {%- endfor %}
+      {%- endif %}
+
+      {%- if variable.starts %}
+        {%- for start in variable.starts %}
+        <Start
+          {% if start.value is not none %}
+          value="{{ start.value }}"
+          {% endif %}
+        />
+        {%- endfor %}
+      {%- endif %}
+    </{{ variable.type }}>
+    {%- endif %}
+  {%- endfor %}
+  </ModelVariables>
+
+  <ModelStructure>
+  {%- for output in model_structure.outputs %}
+    <Output valueReference="{{ output.value_reference }}" dependencies="{{ output.dependencies }}"/>
+  {%- endfor %}
+  </ModelStructure>
+
+</fmiModelDescription>
