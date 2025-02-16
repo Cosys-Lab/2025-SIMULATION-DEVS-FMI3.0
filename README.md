@@ -10,6 +10,13 @@ This repository contains all the code required to reproduce the results of the p
     cd 2025-SIMULATION-DEVS-FMI3.0
     ```
 
+2. **Ensure Google Protobuf is Updated**  
+   *The UniFMU backends run with the system's default Python interpreter, ignoring the virtual environment (venv).  
+   The Protobuf messages were compiled with version **5.27.3**, so the runtime version must be at least **5.27.3**.*
+    ```sh
+    pip install "protobuf>=5.27.3"
+    ```
+
 2. **Create a Python virtual environment**:
     ```sh
     python -m venv venv
