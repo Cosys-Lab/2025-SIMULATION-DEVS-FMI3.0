@@ -1,6 +1,6 @@
 # 2025-SIMULATION-DEVS-FMI3.0
 
-This repository contains all the code required to reproduce the results of the paper **"Adapting DEVS Semantics to FMI 3.0 Co-Simulation Using Synchronous Clocks"**.
+This repository contains all the code required to reproduce the results of the paper **"Adapting Parallel DEVS Semantics to FMI 3.0 Co-Simulation Using Synchronous Clocks"** (*SIMULATION*, 2025, doi: <https://doi.org/10.1177/00375497251393255>).
 
 ## 📌 Steps to Reproduce
 
@@ -45,17 +45,22 @@ This repository contains all the code required to reproduce the results of the p
 ---
 
 ## 📖 How to Cite
+
+Paper doi: <https://doi.org/10.1177/00375497251393255>
+
 If you use this code in your research, please cite:
 
 ```bibtex
-@misc{vanommeslaeghe2025fmi,
-  author = {Yon Vanommeslaeghe and Claudio Gomes and Bert {Van Acker} and Joachim Denil and Paul {De Meulenaere}},
-  title = {Adapting {DEVS} Semantics to {FMI} 3.0 Co-Simulation Using Synchronous Clocks},
-  year = {2025},
-  note = {Submitted to SIMULATION}
+@article{vanommeslaeghe2025adapting,
+  title={Adapting parallel DEVS semantics to FMI 3.0 co-simulation using synchronous clocks},
+  author={Vanommeslaeghe, Yon and Gomes, Claudio and Van Acker, Bert and Denil, Joachim and De Meulenaere, Paul},
+  journal={SIMULATION},
+  pages={00375497251393255},
+  year={2025},
+  publisher={SAGE Publications Sage UK: London, England},
+  doi={10.1177/00375497251393255}
 }
 ```
-Once the paper is accepted, we will update this section with the final citation details.
 
 ---
 
